@@ -9,7 +9,7 @@ console.log(`${name} is ${age} year old. `)
 const gamename = new String("Genshin Impact")
 console.log(gamename);
 console.log(gamename.length);
-console.log(gamename.toUpperCase());// oridinal value in gamename does not change because it is stored in stack memory!!
+console.log(gamename.toUpperCase());// original value in gamename does not change because it is stored in stack memory!!
 console.log(gamename.charAt(5));
 console.log(gamename.indexOf('i'));
 
