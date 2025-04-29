@@ -3,11 +3,11 @@ const user = {
     price: "499",
     welcome: function(){
         console.log(`${this.userName} , Welcome to the website. `);
-        console.log(this);
+        // console.log(this);
         
     }
 }
-// user.welcome()
+user.welcome()
 // user.userName = "sam";
 // user.welcome()
 
