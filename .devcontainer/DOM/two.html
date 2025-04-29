@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="background-color: black; color: white">
+    <div class="Parent">
+      <div class="day">Monday</div>
+      <div class="day">Tuesday</div>
+      <div class="day">Wednesday</div>
+      <div class="day">Thursday</div>
+    </div>
+  </body>
+  <script>
+    const parentClass = document.querySelectorAll(".Parent");
+    console.log(parentClass);
+    const childrenClass = document.querySelectorAll(".day");
+    console.log(childrenClass);
+    // console.log(parentClass.childrenClass) it doesnot work
+    for (let i = 0; i < childrenClass.length; i++) {
+      console.log(childrenClass[i].innerHTML);
+    }
+    childrenClass[1].style.color = "orange";
+    console.log(parentClass.firstChild);
+    console.log(childrenClass.firstChild);
+    console.log(childrenClass.lastElementChild);
+    console.log(document.getElementsByClassName("day").firstChild);
+    
+  </script>
+</html>
