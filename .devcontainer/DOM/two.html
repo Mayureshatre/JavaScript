@@ -23,10 +23,16 @@
       console.log(childrenClass[i].innerHTML);
     }
     childrenClass[1].style.color = "orange";
-    console.log(parentClass.firstChild);
-    console.log(childrenClass.firstChild);
-    console.log(childrenClass.lastElementChild);
-    console.log(document.getElementsByClassName("day").firstChild);
+    // console.log(parentClass.firstElementChild);
+    // console.log(parentClass.firstElementChild);
+    // console.log(childrenClass.lastElementChild);
+    // console.log(document.getElementsByClassName("day").firstChild);
+    const dayOne = document.querySelector('.day')
+    console.log(dayOne.innerHTML);
+    console.log(dayOne.parentElement);
+    console.log(dayOne.nextElementSibling.innerHTML);
+    console.log("Nodes: ", parentClass.childNodes);
+    
     
   </script>
 </html>
