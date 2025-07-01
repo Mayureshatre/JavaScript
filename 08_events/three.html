@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h1>Chai Aur Javascript</h1>
+    <button id="Start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    const saydate = function(str){
+        console.log(str, Date.now())
+    }
+    let printDate;
+    document.querySelector('#Start').addEventListener('click', function(){
+        printDate = setInterval(saydate, 1000, "Mayuresh")
+    })
+    document.querySelector('#stop').addEventListener('click',function(){
+        clearInterval(printDate)
+        console.log("clicked")
+    })
+</script>
+</html>
