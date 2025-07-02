@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+    }
+
+    div {
+        align-items: center;
+        justify-content: center;
+        /* border: 2px solid aliceblue; */
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    h3 {
+        margin: 10px 0;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+</style>
+
+<body style="background-color: black; color: aliceblue;">
+    0 UNSENT Client has been created. open() not called yet. <br>
+    1 OPENED open() has been called. <br>
+    2 HEADERS_RECEIVED send() has been called, and headers and status are available. <br>
+    3 LOADING Downloading; responseText holds partial data. <br>
+    4 DONE The operation is complete.   <br>
+    <div >
+        <img src="https://in.images.search.yahoo.com/images/view;_ylt=Awrx.av7xmRo4_AMSR69HAx.;_ylu=c2VjA3NyBHNsawNpbWcEb2lkAzY3OTVkNTBhZmU2YzA0ODg4MmEyZGUyMDNlMzg4OGUyBGdwb3MDOARpdANiaW5n?back=https%3A%2F%2Fin.images.search.yahoo.com%2Fsearch%2Fimages%3Fp%3Dhitesh%2Bchoudhary%26type%3DE210IN1589G0%26fr%3Dmcafee%26fr2%3Dpiv-web%26tab%3Dorganic%26ri%3D8&w=460&h=460&imgurl=avatars.githubusercontent.com%2Fu%2F11613311%3Fv%3D4&rurl=https%3A%2F%2Fhiteshchoudhary.com%2Fhindi.html&size=230KB&p=hitesh+choudhary&oid=6795d50afe6c048882a2de203e3888e2&fr2=piv-web&fr=mcafee&tt=Hitesh+Choudhary+Home+page&b=0&ni=21&no=8&ts=&tab=organic&sigr=xsgutpKbwoPy&sigb=mcAMo7RG0hhg&sigi=XYMgitw_ZV._&sigt=ZLlqfle6Vv6j&.crumb=GhgvFmWkZf9&fr=mcafee&fr2=piv-web&type=E210IN1589G0" alt="" id="photo">
+        <h3>Hitesh Choudhary</h3>
+        <p>Followers: <span id="followers"></span></p>
+    </div>
+</body>
+<script>
+    const requestUrl =" https://api.github.com/users/hiteshchoudhary"
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', requestUrl)
+
+    xhr.send()
+
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState)
+        if(xhr.readyState === 4 ){
+            const data = JSON.parse(this.responseText)
+            console.log(typeof data) // most of the times the data that we recieve through url is in string type . sometimes it is in object type
+            console.log(data)
+            const followers = document.getElementById('followers')
+            followers.innerHTML = data.followers
+
+        }
+    }
+</script>
+
+</html>
