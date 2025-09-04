@@ -15,7 +15,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(45deg, #0a0a0a, #3a4452);
+  background: linear-gradient(45deg, #0a0a0a, #3d4551);
 }
 
 .calculator {
@@ -24,7 +24,7 @@ body {
   margin-left: 550px;
   border-radius: 20px;
   background: transparent;
-  box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5);
+  box-shadow: 0px 3px 15px rgba(83, 86, 91, 0.5);
 }
 
 input{

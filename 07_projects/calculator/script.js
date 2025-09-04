@@ -61,6 +61,7 @@ document.addEventListener("keydown", (e) => {
     result = "";
     input.value = result;
   } else if (e.key === "Enter") {
+    result = result.replaceAll("^", "**");
     result = eval(result);
     input.value = result;
     result = result.toString();
