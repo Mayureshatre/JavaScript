@@ -4,7 +4,8 @@ const priorityInput = document.getElementById("priority");
 const submitButton = document.getElementById("submit");
 
 submitButton.addEventListener("click", (e) => {
-  e.preventDefault(CheckValidity());
+  e.preventDefault();
+  CheckValidity();
 });
 taskInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
@@ -26,9 +27,11 @@ function addTask() {
   const task = {
     task: taskInput.value,
     priority: priorityInput.value,
+    completed: false,
   };
   arrTasks.push(task);
   taskInput.value = "";
+  priorityInput.value = "";
 
   displayTask();
 }
@@ -42,60 +45,79 @@ function displayTask() {
   }
 
   arrTasks.forEach((obj) => {
+
     let li = document.createElement("li");
+
+    // li.innerHTML = `<span class="task&priority">${obj.task} - (${obj.priority})</span>`;
+
+    let taskSpan = li.createElement("span");
+    taskSpan.className = "task&priority";
+    taskSpan.textContent = `${obj.task} - (${obj.priority})`;
+    
     let deleteButton = document.createElement("button");
-    let editButton = document.createElement("button");
-
-    li.innerHTML = `<span class="task&priority">${obj.task} - (${obj.priority})</span>`;
     deleteButton.classList = "delete";
-    deleteButton.innerHTML = `<img src="https://tse4.mm.bing.net/th/id/OIP.OLhf-Opp-n2b1r8coDAjRwHaHa?pid=Api&P=0&w=300&h=300" alt="Delete">`;
-    editButton.classList = "edit";
-    editButton.innerHTML = `<img src="https://icon-library.com/images/edit-icon/edit-icon-0.jpg" alt="Edit">`;
-
-    li.appendChild(editButton)
-    li.appendChild(deleteButton)
-    taskList.appendChild(li);
-
+    deleteButton.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/6460/6460112.png " alt="Delete">`;
     deleteButton.addEventListener("click", (e) => {
       e.preventDefault();
       li.remove();
       // arrTasks = arrTasks.filter(
       //   (kaam) => kaam.task !== obj.task || kaam.priority !== obj.priority
       // );
-      arrTasks.splice(arrTasks.indexOf(obj), 1)
+      arrTasks.splice(arrTasks.indexOf(obj), 1);
       displayTask();
     });
+
+    let editButton = document.createElement("button");
+    editButton.classList = "edit";
+    editButton.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4476/4476348.png " alt="Edit">`;
+    editButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        // console.log(obj);
+        editTask(arrTasks.indexOf(obj));
+      });
+
+    let checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.checked = obj.completed || false;  
+    checkBox.classList = "checkBox";
+    checkBox.addEventListener("change", (e) => {
+      obj.completed  = checkBox.checked;
+      if (obj.completed) {
+        li.style.textDecoration = "line-through";
+      } else {
+        li.style.textDecoration = "none";
+      }
+    });
+
+    li.appendChild(checkBox);
+    li.appendChild(taskSpan);
+    li.appendChild(editButton);
+    li.appendChild(deleteButton);
+    taskList.appendChild(li);
   });
 }
-function deleteAllTask() {}
+function deleteAllTask() {
+  arrTasks = [];
+  displayTask();
+}
 
-function sortTask(){
+function sortTask() {
   const priorityMap = {
     High: 1,
     Medium: 2,
-    Low: 3
-  }
+    Low: 3,
+  };
   arrTasks.sort((a, b) => {
-    return priorityMap[a.priority] - priorityMap[b.priority]
-  })
-  displayTask()
+    return priorityMap[a.priority] - priorityMap[b.priority];
+  });
+  displayTask();
 }
 
-const allTasks = document.querySelectorAll('li')
-const arrAllTasks = Array.from(allTasks);
 
-arrAllTasks.forEach((taskitem) => {
-  editButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    console.log(taskitem);
-    editTask(arrAllTasks.indexOf(taskitem));
-  })
-})
-
-function editTask(index){
-  const kaam = arrTasks(index)
-  taskInput.value = kamm.task;
+function editTask(index) {
+  let kaam = arrTasks[index];
+  taskInput.value = kaam.task;
   priorityInput.value = kaam.priority;
-  arrTasks.splice(index,1)
+  arrTasks.splice(index, 1);
   displayTask();
 }
