@@ -22,7 +22,7 @@ body {
 
 .todolist {
   width: 500px;
-  height: 600px;
+  height: 650px;
   /* border: 2px solid red; */
   border-radius: 12px;
   margin: 60px;
@@ -33,8 +33,9 @@ body {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  overflow-y: auto;
-  max-height: 650px;
+  overflow-y:auto;
+  overflow-x: hidden;
+  max-height: 700px;
 }
 
 h1 {
@@ -42,10 +43,14 @@ h1 {
   margin-bottom: 20px;
   cursor: pointer;
   transition: color 0.3s ease;
+  background: linear-gradient(to right, #ffcc00, #ff6a00);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 h1:hover {
-  color: #ffcc00;
+  transition: translateY(3px);
+  text-shadow: 0px 8px 16px rgba(255, 204, 0, 0.5);
 }
 
 #inputContainer {
@@ -79,19 +84,43 @@ h1:hover {
 #task::placeholder, #priority::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
+#priority{
+  appearance: none;
+  padding-right: 30px;
+}
 
 #priority option{
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #2b4072; 
+  color: #ffffff;
   text-decoration: none;
   border: none;
   cursor: pointer;
 }
 
+.customArrow{
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: white;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  position: absolute;
+  pointer-events: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+  top: 284px;
+  right: 550px;
+}
+.customArrow:hover{
+  stroke: #ffcc00;
+}
+
 #submit {
   width: 100px;
-  margin: 25px auto;
-  padding: 12px 20px;
+  margin: 20px auto;
+  margin-bottom: 10px;
+  padding: 12px 15px;
   border: none;
   border-radius: 8px;
   /* background: linear-gradient(to right, #6389bf, #0f82ee); */
@@ -106,12 +135,62 @@ h1:hover {
 
 #submit:hover {
   background-color: #00a6ff;
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 #submit::value {
   color: #ffffff;
   font-weight: bold;
+}
+
+.sort&delete {
+  display: flex;
+  align-items: flex-start;
+}
+#sort, #deleteAll {
+    width: 80px;
+    margin: 12px 15px;
+    padding: 4px 7px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0fd8ee;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+
+#sort:hover, #deleteAll:hover {
+  background-color: #00a6ff;
+  transform: scale(1.04);
+}
+
+.display {
+  /* border: 2px solid red; */
+  height: 400px;
+  max-width: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.display::-webkit-scrollbar {
+  width: 6px;
+}
+
+.display::-webkit-scrollbar-track{
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.display::-webkit-scrollbar-thumb{
+  background-color: linear-gradient(#6389bf, #0f82ee);
+  border-radius: 12px ;
+}
+
+.display::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#4a73aa, #0066cc);
 }
 
 #taskList {
@@ -121,6 +200,7 @@ h1:hover {
   /* border: 2px solid red; */
   color: #ffffff;
 }
+
 #taskList li {
   display: flex;
   justify-content: flex-start;
@@ -134,9 +214,46 @@ h1:hover {
   border-radius: 12px;
   background-color: rgb(200, 300, 300);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   flex-wrap: wrap;
   color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0px);
+  }
+}
+
+#taskList li:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+#taskList li::-webkit-scrollbar{
+  width: 0px;
+}
+
+#taskList li::-webkit-scrollbar-track{
+  background-color: rgb(200, 200, 200,0.1);
+  border-radius: 12px;
+}
+
+#taskList li::-webkit-scrollbar-thumb{
+  background: linear-gradient(#6389bf, #0f82ee);
+  border-radius: 12px;
+}
+
+#taskList li::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(#4a73aa, #0066cc);
 }
 
 #taskList li span {
@@ -184,6 +301,15 @@ h1:hover {
   height: 100%;
 }
 
-.chechbox {
-  
+.checkbox {
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: grey;
+  transition: all 0.3s ease;
 }

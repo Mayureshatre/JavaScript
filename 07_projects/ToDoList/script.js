@@ -2,6 +2,8 @@ let arrTasks = [];
 const taskInput = document.getElementById("task");
 const priorityInput = document.getElementById("priority");
 const submitButton = document.getElementById("submit");
+const sortButton = document.getElementById("sort");
+const deleteAllButton = document.getElementById("deleteAll");
 
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -12,6 +14,14 @@ taskInput.addEventListener("keypress", (e) => {
     e.preventDefault();
     CheckValidity();
   }
+});
+sortButton.addEventListener("click", (e)=>{
+  e.preventDefault();
+  sortTask();
+});
+deleteAllButton.addEventListener("click", (e)=>{
+  e.preventDefault();
+  deleteAllTask();
 });
 
 function CheckValidity() {
@@ -50,7 +60,7 @@ function displayTask() {
 
     // li.innerHTML = `<span class="task&priority">${obj.task} - (${obj.priority})</span>`;
 
-    let taskSpan = li.createElement("span");
+    let taskSpan = document.createElement("span");
     taskSpan.className = "task&priority";
     taskSpan.textContent = `${obj.task} - (${obj.priority})`;
     
@@ -75,17 +85,22 @@ function displayTask() {
         // console.log(obj);
         editTask(arrTasks.indexOf(obj));
       });
-
+    
     let checkBox = document.createElement("input");
     checkBox.type = "checkbox";
     checkBox.checked = obj.completed || false;  
     checkBox.classList = "checkBox";
+    if(obj.completed){
+      li.classList.add("completed");
+    }
     checkBox.addEventListener("change", (e) => {
       obj.completed  = checkBox.checked;
       if (obj.completed) {
-        li.style.textDecoration = "line-through";
+        // li.style.textDecoration = "line-through";
+        li.classList.add("completed");
       } else {
-        li.style.textDecoration = "none";
+        // li.style.textDecoration = "none";
+        li.classList.remove("completed");
       }
     });
 
@@ -112,7 +127,6 @@ function sortTask() {
   });
   displayTask();
 }
-
 
 function editTask(index) {
   let kaam = arrTasks[index];
